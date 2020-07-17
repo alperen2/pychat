@@ -7,112 +7,54 @@
         padding: 0;
         box-sizing: border-box;
     }
-
-    #chat {
-        display: none;
-    }
-
-    body {
-        font: 13px Helvetica, Arial;
-    }
-
-    #chat form {
-        background: #fff;
-        padding: 3px;
-        position: fixed;
-        bottom: 0;
-        width: 100%;
-    }
-
-    #chat form input {
-        padding: 10px;
-        width: 90%;
-        margin-right: 0.5%;
-    }
-
-    #chat form button {
-        width: 9%;
-        background: rgb(130, 224, 255);
-        border: none;
-        padding: 10px;
-    }
-
-    #chat #messages {
-        list-style-type: none;
-        margin: 0;
-        padding: 0;
-    }
-
-    #chat #messages li {
-        padding: 5px 10px;
-    }
-
-    #chat #messages li:nth-child(odd) {
-        background: #eee;
-    }
-
-    .modal {
-        display: none;
-        justify-content: center;
-        align-content: center;
-        width: 80%;
-        height: 30px;
-        position: fixed;
-        z-index: 99999;
-        background-color: blue;
-        color: white;
-        left: 15%;
-        margin-top: 10px;
-        line-height: 30px;
-        border-radius: 5px;
-    }
-
-    .typing {
-        color: black;
-    }
-
-    #login {
-        display: flex;
-        justify-items: center;
-        width: 100%;
-        height: 100%;
-        padding: 5px 10px;
-    }
-
-    #login #username,
-    #login button {
-        font-size: 20px;
-        padding: 3px 5px;
-
-    }
-
-
-
-
 </style>
 
 {% endblock style %}
 
 {% block content %}
+<!-- Alert -->
+<div id="alert">
+    <div class="ui container text">
+        <div class="ui message" style="margin-top: 10px;">
+            <p></p>
+        </div>
+    </div>
+</div>
 
-<div class="modal">
-
+<!-- Login Form -->
+<div class="ui container text" style="padding-top: 15px;">
+    <div id="login" class="ui segment ">
+        <form class="ui form" id="loginForm" method="POST">
+            <div class="field">
+                <label>Username</label>
+                <input type="text" name="username" placeholder="username">
+            </div>
+            <div class="field">
+                <label>Password</label>
+                <input type="text" name="password" placeholder="Password">
+            </div>
+            <button class="ui button" type="submit">Login</button>
+        </form>
+    </div>
 </div>
 
 
-<div id="login">
-    <form id="formJoin">
-        <input type="text" name="username" id="username" placeholder="username">
-        <button type="submit">Join</button>
-    </form>
-</div>
-<div id="chat">
-    <ul id="messages"></ul>
-    <form action="" id="chatForm">
-        <div class="typing"></div>
+<!-- Messaging  -->
+<div class="ui container" id="message_container">
+    
+    <!-- messages  -->
+    <div class="ui list" id="messages"></div>
 
-        <input id="m" autocomplete="off" />
-        <button>Send</button>
-    </form>
+    <!-- send message input  -->
+    
+    <div style="position: absolute; width: 80%; bottom: 10px; left:10%">
+        <div class="column">
+            <div id="typing" ></div>
+            <div class="ui fluid action input">
+                <input type="text" id="message_input" placeholder="Search...">
+                <div class="ui button" id="btnSend">Send</div>
+            </div>
+        </div>
+    </div>
 </div>
 {% endblock content %}
