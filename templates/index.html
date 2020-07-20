@@ -13,43 +13,21 @@
 
 {% block content %}
 <!-- Alert -->
-<div id="alert">
-    <div class="ui container text">
-        <div class="ui message" style="margin-top: 10px;">
-            <p></p>
-        </div>
-    </div>
+<div id="alert" style="padding-top: 10px;">
+   
 </div>
-
-<!-- Login Form -->
-<div class="ui container text" style="padding-top: 15px;">
-    <div id="login" class="ui segment ">
-        <form class="ui form" id="loginForm" method="POST">
-            <div class="field">
-                <label>Username</label>
-                <input type="text" name="username" placeholder="username">
-            </div>
-            <div class="field">
-                <label>Password</label>
-                <input type="text" name="password" placeholder="Password">
-            </div>
-            <button class="ui button" type="submit">Login</button>
-        </form>
-    </div>
-</div>
-
 
 <!-- Messaging  -->
 <div class="ui container" id="message_container">
-    
+
     <!-- messages  -->
     <div class="ui list" id="messages"></div>
 
     <!-- send message input  -->
-    
+
     <div style="position: absolute; width: 80%; bottom: 10px; left:10%">
         <div class="column">
-            <div id="typing" ></div>
+            <div id="typing"></div>
             <div class="ui fluid action input">
                 <input type="text" id="message_input" placeholder="Search...">
                 <div class="ui button" id="btnSend">Send</div>

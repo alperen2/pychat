@@ -8,13 +8,29 @@
     <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
     <title>Document</title>
     {% block style %}
-    
+
     {% endblock style %}
 </head>
 
 <body>
+    <!-- Alert -->
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+        <ul class=flashes>
+        {% for message in messages %}
+           <div id="alert">
+            <div class="ui container">
+                <div class="ui {{category}} message">
+                    {{message}}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+        </ul>
+    {% endif %}
+    {% endwith %}
     {% block content %}
-    
+
     {% endblock content %}
 </body>
 <script src="//cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"
