@@ -91,7 +91,13 @@ def handle_send(msg):
     emit('send', {'username':session['username'], 'msg':msg},  broadcast=True, include_self=False)
      
                 
+
+
 if __name__ == 'app':
+
+    certfile = os.path.join(ROOT_DIR, '/etc/ssl/certificate.crt')
+    keyfile = os.path.join(ROOT_DIR, '/etc/ssl/private.key')  
+
     socketio.run(
         app,
         host='0.0.0.0',
