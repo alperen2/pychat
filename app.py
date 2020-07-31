@@ -4,6 +4,7 @@ from flask_socketio import SocketIO, send, emit, join_room, leave_room
 from functools import wraps
 from flask_session import Session
 import os
+import eventlet
 
 app = Flask("__name__")
 app.config['SECRET_KEY'] = os.urandom(24)
@@ -13,7 +14,7 @@ app.config["MYSQL_PASSWORD"] = "root"
 app.config["MYSQL_DB"] = "wp_db"
 app.config["MYSQL_CURSORCLASS"] = "DictCursor"
 app.config["SESSION_TYPE"] = "filesystem"
-# app.config["SESSION_USE_SIGNER"] = True
+app.config["SESSION_USE_SIGNER"] = True
 
 Session(app)
 
@@ -88,7 +89,15 @@ def handle_notyping():
 @socketio.on('send')
 def handle_send(msg):
     emit('send', {'username':session['username'], 'msg':msg},  broadcast=True, include_self=False)
-
-
-if __name__ == '__main__':
-    socketio.run(app)
+     
+                
+if __name__ == 'app':
+    socketio.run(
+        app,
+        host='0.0.0.0',
+        port=5000,
+        certfile=certfile,
+        keyfile=keyfile,
+        ssl_context=None,
+        use_reloader=False
+    )
