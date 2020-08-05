@@ -104,6 +104,5 @@ if __name__ == 'app':
         port=5000,
         certfile=certfile,
         keyfile=keyfile,
-        ssl_context=None,
         use_reloader=False
     )
