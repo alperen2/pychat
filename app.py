@@ -6,7 +6,7 @@ from flask_session import Session
 import os
 import eventlet
 
-app = Flask("__name__")
+app = Flask("__name__", template_folder="templates")
 app.config['SECRET_KEY'] = os.urandom(24)
 app.config["MYSQL_HOST"] = "localhost"
 app.config["MYSQL_USER"] = "root"
@@ -95,8 +95,8 @@ def handle_send(msg):
 
 if __name__ == 'app':
 
-    certfile = os.path.join(ROOT_DIR, '/etc/ssl/certificate.crt')
-    keyfile = os.path.join(ROOT_DIR, '/etc/ssl/private.key')  
+    certfile = os.path.join(__file__, '/etc/ssl/certificate.crt')
+    keyfile = os.path.join(__file__, '/etc/ssl/private.key')  
 
     socketio.run(
         app,
