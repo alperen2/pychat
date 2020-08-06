@@ -5,6 +5,8 @@ from functools import wraps
 from flask_session import Session
 import os
 import eventlet
+from eventlet import wsgi
+
 
 app = Flask("__name__", template_folder="templates")
 app.config['SECRET_KEY'] = os.urandom(24)
@@ -20,6 +22,7 @@ Session(app)
 
 socketio = SocketIO(app)
 mysql = MySQL(app)
+
 
 # kullanıcı giriş decarator
 def check_login(f):
@@ -93,16 +96,5 @@ def handle_send(msg):
                 
 
 
-if __name__ == 'app':
-
-    certfile = os.path.join(__file__, '/etc/ssl/certificate.crt')
-    keyfile = os.path.join(__file__, '/etc/ssl/private.key')  
-
-    socketio.run(
-        app,
-        host='0.0.0.0',
-        port=5000,
-        certfile=certfile,
-        keyfile=keyfile,
-        use_reloader=False
-    )
+if __name__ == '__main__':
+    wsgi.server(eventlet.listen(('', 8090)), index)
