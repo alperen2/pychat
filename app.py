@@ -8,7 +8,7 @@ import eventlet
 from eventlet import wsgi
 
 
-app = Flask("__name__", template_folder="templates")
+app = Flask("__name__", template_folder=os.path.join(os.path.dirname(__file__), 'templates'))
 app.config['SECRET_KEY'] = os.urandom(24)
 app.config["MYSQL_HOST"] = "localhost"
 app.config["MYSQL_USER"] = "root"
