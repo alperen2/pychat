@@ -1,11 +1,10 @@
 from flask_mysqldb import MySQL
 from flask import Flask, render_template, request,flash, redirect, url_for, session, Response
-from flask_socketio import SocketIO, send, emit, join_room, leave_room
+from flask_socketio import SocketIO, send, emit, join_room, leave_room, socketio as sc
 from functools import wraps
 from flask_session import Session
 import os
-import eventlet
-from eventlet import wsgi
+from aiohttp import web
 
 
 app = Flask("__name__", template_folder=os.path.join(os.path.dirname(__file__), 'templates'))
@@ -21,6 +20,12 @@ app.config["SESSION_USE_SIGNER"] = True
 Session(app)
 
 socketio = SocketIO(app)
+sio = sc.AsyncServer(async_mode='aiohttp')
+
+app2 = web.Application()
+sio.attach(app2)
+
+
 mysql = MySQL(app)
 
 
@@ -93,8 +98,7 @@ def handle_notyping():
 def handle_send(msg):
     emit('send', {'username':session['username'], 'msg':msg},  broadcast=True, include_self=False)
      
-                
 
 
 if __name__ == '__main__':
-    wsgi.server(eventlet.listen(('', 8090)), index)
+    web.run_app(app)
